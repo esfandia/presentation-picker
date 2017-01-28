@@ -22,7 +22,7 @@ public class PresentationController {
         Iterable<ProjectGroup> groups = pgrepo.findAll();
         model.addAttribute("presentations", presentations);
         model.addAttribute("groups", groups);
-        return "Hello";
+        return "hello";
     }
 
     @GetMapping("/assign")
