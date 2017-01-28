@@ -59,7 +59,7 @@
     <td th:text="${pres.projectGroup.name}" th:if="${pres.projectGroup}"></td>
     <td th:unless="${pres.projectGroup}">
         <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
+            <button class="dropbtn">Groups</button>
             <div class="dropdown-content" th:each="gr : ${groups}">
                 <a href="assign?pres.idandgr.id" th:href="@{assign(presId=${pres.id}, grId=${gr.id})}" th:text="${gr.name}">some text</a>
             </div>

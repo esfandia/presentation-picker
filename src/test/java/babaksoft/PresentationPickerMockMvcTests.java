@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.not;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,6 +43,11 @@ public class PresentationPickerMockMvcTests {
         pres.setProjectGroup(pg);
         repository.save(pres);
 
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("fefe")))
+                .andExpect(content().string(containsString("beuarh")))
+                .andExpect(content().string(not(containsString("Groups"))));
+
         Presentation pres2 = new Presentation("badfefe");
         repository.save(pres2);
 
@@ -49,6 +55,6 @@ public class PresentationPickerMockMvcTests {
                 .andExpect(content().string(containsString("fefe")))
                 .andExpect(content().string(containsString("beuarh")))
                 .andExpect(content().string(containsString("badfefe")))
-                .andExpect(content().string(containsString("Not Available")));
+                .andExpect(content().string(containsString("Groups")));
     }
 }
