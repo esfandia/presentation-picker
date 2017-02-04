@@ -17,7 +17,7 @@
             <select th:name="grId">
                 <option th:each="gr : ${groups}"
                         th:value="${gr.id}"
-                        th:text="#{${gr.name}}">group name</option>
+                        th:text="${gr.name}">group name</option>
             </select>
             <input type="text" th:name="studentId" th:value="*{studentId}" />
             <input type="submit" value="Book It!"/>
