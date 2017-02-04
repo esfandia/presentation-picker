@@ -35,10 +35,10 @@ public class PresentationPickerJpaTests {
 
     @Test
     public void testAddingMemberToProjectGroup() {
-        pg.addMember("toto");
+        pg.addMember("1234");
         pgrepo.save(pg);
         ProjectGroup retrievedPg = pgrepo.findAll().iterator().next();
         assertEquals(1, retrievedPg.getMembers().size());
-        assertEquals("toto", retrievedPg.getMembers().get(0));
+        assertEquals("1234", retrievedPg.getMembers().get(0));
     }
 }

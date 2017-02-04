@@ -26,10 +26,11 @@ public class PresentationController {
     }
 
     @GetMapping("/assign")
-    public String assignProjectGroupToPresentation(@RequestParam int presId, @RequestParam int grId, Model model) {
+    public String assignProjectGroupToPresentation(@RequestParam int presId, @RequestParam int grId, @RequestParam String studentId, Model model) {
         Presentation pres = presrepo.findOne(presId);
         ProjectGroup pg = pgrepo.findOne(grId);
-        if (pres.getProjectGroup() == null) {
+
+        if ((pres.getProjectGroup() == null) && (pg.getMembers().contains(studentId))) {
             pres.setProjectGroup(pg);
             presrepo.save(pres);
         }
