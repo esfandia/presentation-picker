@@ -45,16 +45,6 @@ public class PresentationPickerMockMvcTests {
 
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("fefe")))
-                .andExpect(content().string(containsString("beuarh")))
-                .andExpect(content().string(not(containsString("Groups"))));
-
-        Presentation pres2 = new Presentation("badfefe");
-        repository.save(pres2);
-
-        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("fefe")))
-                .andExpect(content().string(containsString("beuarh")))
-                .andExpect(content().string(containsString("badfefe")))
-                .andExpect(content().string(containsString("Groups")));
+                .andExpect(content().string(containsString("beuarh")));
     }
 }
