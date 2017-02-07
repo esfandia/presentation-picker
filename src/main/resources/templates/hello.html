@@ -9,7 +9,7 @@
 <table>
 <tr th:each="pres : ${presentations}">
     <td th:text="${pres.topic}">Topic should go here</td>
-    <td th:text="${pres.projectGroup}? ${pres.projectGroup.name}: 'unavailable'" ></td>
+    <!-- <td th:text="${pres.projectGroup}? ${pres.projectGroup.name}: 'unavailable'" ></td> -->
     <td th:text="${pres.projectGroup.name}" th:if="${pres.projectGroup}"></td>
     <td th:unless="${pres.projectGroup}">
         <form action="#" th:action="@{assign}" method="get">

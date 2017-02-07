@@ -20,6 +20,7 @@ public class PresentationController {
     public String displayAll(Model model) {
         Iterable<Presentation> presentations = presrepo.findAll();
         Iterable<ProjectGroup> groups = pgrepo.findAll();
+
         model.addAttribute("presentations", presentations);
         model.addAttribute("groups", groups);
         return "hello";
