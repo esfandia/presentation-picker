@@ -5,11 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.net.URI;
-import java.net.URL;
 import java.util.Scanner;
 
 @Component
@@ -21,11 +20,13 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private ProjectGroupRepository pgrepo;
 
-    @Value(value = "classpath:static/seed.txt")
-    private Resource fileResource;
+    //@Value("#{seed ?: \"classpath:static/seed.txt\"}")
+    @Value("${seed}")
+    private Resource seed;
 
     public void run(ApplicationArguments args) throws Exception {
-        URI f = fileResource.getURI();
+        if (seed == null) seed = new UrlResource("classpath:static/seed.txt");
+        URI f = seed.getURI();
         Scanner s = new Scanner(f.toURL().openStream());
         String input;
         while (s.hasNextLine()) {
