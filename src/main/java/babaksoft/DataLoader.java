@@ -20,12 +20,12 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     private ProjectGroupRepository pgrepo;
 
-    //@Value("#{seed ?: \"classpath:static/seed.txt\"}")
-    @Value("${seed}")
+    @Value("${seed:classpath:static/seed.txt}")
+    //@Value("${seed}")
     private Resource seed;
 
     public void run(ApplicationArguments args) throws Exception {
-        if (seed == null) seed = new UrlResource("classpath:static/seed.txt");
+        //if (seed == null) seed = new UrlResource("classpath:static/seed.txt");
         URI f = seed.getURI();
         Scanner s = new Scanner(f.toURL().openStream());
         String input;
