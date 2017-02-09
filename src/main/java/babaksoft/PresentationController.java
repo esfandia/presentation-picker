@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class PresentationController {
 
@@ -21,8 +24,24 @@ public class PresentationController {
         Iterable<Presentation> presentations = presrepo.findAll();
         Iterable<ProjectGroup> groups = pgrepo.findAll();
 
+        // collect undecided groups.
+        // heavily inelegant and inefficient code follows...
+        // TODO replace with proper repository query instead
+        List<ProjectGroup> decidedGroups = new ArrayList<>();
+
+        for (Presentation p: presentations) {
+            ProjectGroup g = p.getProjectGroup();
+            if (g != null) decidedGroups.add(g);
+        }
+
+        List<ProjectGroup> allGroups = new ArrayList<>();
+
+        for (ProjectGroup g : groups) {allGroups.add(g);}
+
+        allGroups.removeAll(decidedGroups);
+
         model.addAttribute("presentations", presentations);
-        model.addAttribute("groups", groups);
+        model.addAttribute("groups", allGroups);
         return "hello";
     }
 
