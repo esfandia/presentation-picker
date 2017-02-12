@@ -5,6 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+Please choose the topic you'd like to present:
+<ul>
+    <li>select your group from the dropdown menu</li>
+    <li>enter the student number (last 6 digits only) of one of the group members (this is sanity check to make sure you don't pick the wrong group by mistake) </li>li>
+    <li>hit the "book it" button</li>
+</ul>
+Note that you can only book one presentation, after which your group will no longer appear in the drop down menu. Once a presentation has been booked, it is no longer available to other groups (the "book it" button will no longer be available).
+Finally, a word of caution: this is very much an alpha release, and things can go horribly wrong if you truly intended to. Be nice!
 <p th:text="'List of topics'" />
 <table>
 <tr th:each="pres : ${presentations}">
