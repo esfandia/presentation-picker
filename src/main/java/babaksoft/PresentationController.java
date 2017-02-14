@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +67,19 @@ public class PresentationController {
         Presentation pres2 = new Presentation(name + " without proj");
         presrepo.save(pres2);
         return "redirect:/";
+    }
+
+    @GetMapping("/list")
+    public @ResponseBody String listPicks() {
+        String picks = "";
+        // should be able to just query the join table, here's an ugly version for now
+        Iterable<Presentation> presentations = presrepo.findAll();
+        for (Presentation pres : presentations) {
+            ProjectGroup pg = pres.getProjectGroup();
+            if (pg != null) {
+                picks += "pres#" + pres.getTopic() + "#" + pg.getName() + "\n";
+            }
+        }
+        return picks;
     }
 }
