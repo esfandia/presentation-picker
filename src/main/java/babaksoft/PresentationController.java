@@ -29,10 +29,16 @@ public class PresentationController {
         // heavily inelegant and inefficient code follows...
         // TODO replace with proper repository query instead
         List<ProjectGroup> decidedGroups = new ArrayList<>();
+        List<Presentation> availableTopics = new ArrayList<Presentation>();
 
         for (Presentation p: presentations) {
             ProjectGroup g = p.getProjectGroup();
-            if (g != null) decidedGroups.add(g);
+            if (g != null) {
+                decidedGroups.add(g);
+            } else  {
+                availableTopics.add(p);
+            }
+
         }
 
         List<ProjectGroup> allGroups = new ArrayList<>();
@@ -41,7 +47,7 @@ public class PresentationController {
 
         allGroups.removeAll(decidedGroups);
 
-        model.addAttribute("presentations", presentations);
+        model.addAttribute("presentations", availableTopics);
         model.addAttribute("groups", allGroups);
         return "hello";
     }

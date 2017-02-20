@@ -35,16 +35,19 @@ public class PresentationPickerMockMvcTests {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("fefe")));
     }
-
     @Test
     public void correctlyIncludesPresentationAndItsGroupAfterLocalInsertion() throws Exception {
-        Presentation pres = new Presentation("fefe");
-        ProjectGroup pg = new ProjectGroup("beuarh");
-        pres.setProjectGroup(pg);
-        repository.save(pres);
+        Presentation pres1 = new Presentation("fefe");
+        ProjectGroup pg1 = new ProjectGroup("beuarh");
+        Presentation pres2 = new Presentation("foo");
+
+
+        pres1.setProjectGroup(pg1);
+        repository.save(pres1);
+        repository.save(pres2);
 
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("fefe")))
-                .andExpect(content().string(containsString("beuarh")));
+                .andExpect(content().string(containsString("foo")))
+                .andExpect(content().string(not(containsString("fefe"))));
     }
 }
