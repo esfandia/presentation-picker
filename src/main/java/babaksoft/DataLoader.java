@@ -30,7 +30,6 @@ public class DataLoader implements ApplicationRunner {
         long size = pgrepo.findAll().spliterator().getExactSizeIfKnown();
         if (size > 0) return;
 
-
         //if (seed == null) seed = new UrlResource("classpath:static/seed.txt");
         URI f = seed.getURI();
         Scanner s = new Scanner(f.toURL().openStream());
