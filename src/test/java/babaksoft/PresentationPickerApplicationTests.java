@@ -23,12 +23,6 @@ public class PresentationPickerApplicationTests {
     private PresentationRepository repository;
 
     @Test
-    public void correctlyInsertsPresentation() {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/tyty",
-                String.class)).contains("tyty");
-    }
-
-    @Test
     public void correctlyIncludesPresentationAfterLocalInsertion() {
         Presentation pres = new Presentation("fafa");
         repository.save(pres);

@@ -58,17 +58,6 @@ public class PresentationController {
         return "redirect:/";
     }
 
-    @GetMapping("/{name}")
-    public String stupidTopicAdding(@PathVariable String name, Model model) {
-        Presentation pres = new Presentation(name);
-        ProjectGroup g = new ProjectGroup("default");
-        pres.setProjectGroup(g);
-        presrepo.save(pres);
-        Presentation pres2 = new Presentation(name + " without proj");
-        presrepo.save(pres2);
-        return "redirect:/";
-    }
-
     @GetMapping("/list")
     public @ResponseBody String listPicks() {
         String picks = "";
